@@ -341,7 +341,8 @@ Helpers.isAceCommand = function () {
  * @public
  */
 Helpers.viewsPath = function () {
-  return Helpers.resourcesPath('views')
+  const toDir = projectDirectories.app
+  return Helpers._makePath(rootPath, toDir, 'Modules')
 }
 
 /**

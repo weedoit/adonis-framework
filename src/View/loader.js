@@ -42,9 +42,12 @@ exports = module.exports = nunjucks.Loader.extend({
    */
   getSource: function (name, callback) {
     name = name.replace(/((?!\.+\/)\.(?!njk))/g, '/')
+    name = name.replace(/^(.*)@(.*)/g, '$1/Views/$2')
     name = path.extname(name) === '.njk' ? name : `${name}.njk`
+
     const viewPath = path.resolve(this.viewsPath, name)
     const self = this
+    console.log(viewPath);
 
     fs.readFile(viewPath, function (err, content) {
       if (err) {

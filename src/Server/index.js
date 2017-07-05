@@ -26,7 +26,7 @@ class Server {
 
   constructor (Request, Response, Route, Helpers, Middleware, Static, Session, Config, Event) {
     this.Request = Request
-    this.controllersPath = 'Http/Controllers'
+    this.controllersPath = 'Modules'
     this.Response = Response
     this.Session = Session
     this.route = Route
@@ -88,7 +88,10 @@ class Server {
    * @private
    */
   _makeRouteAction (handler) {
-    const formattedHandler = typeof (handler) === 'string' ? this.helpers.makeNameSpace(this.controllersPath, handler) : handler
+    const formattedHandler = (typeof (handler) === 'string')
+      ? this.helpers.makeNameSpace(this.controllersPath, helpers.parseControllerModule(handler))
+      : handler;
+
     resolver.validateBinding(formattedHandler)
     return resolver.resolveBinding(formattedHandler)
   }
