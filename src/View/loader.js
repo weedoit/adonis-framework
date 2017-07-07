@@ -47,7 +47,6 @@ exports = module.exports = nunjucks.Loader.extend({
 
     const viewPath = path.resolve(this.viewsPath, name)
     const self = this
-    console.log(viewPath);
 
     fs.readFile(viewPath, function (err, content) {
       if (err) {
