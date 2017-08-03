@@ -74,12 +74,6 @@ class Server {
     }
 
     const routeAction = this._makeRouteAction(resolvedRoute.handler)
-
-    // Inject request and response into controller instance
-    if (routeAction.instance && routeAction.instance.beforeRouteAction) {
-        routeAction.instance.beforeRouteAction(request, response);
-    }
-
     const chain = helpers.makeMiddlewareChain(this.middleware, routeAction, false, resolvedRoute)
 
     return this._executeChain(chain, request, response)
