@@ -29,10 +29,10 @@ helpers.makeMiddlewareChain = function (middleware, finalHandler, isGlobal, reso
   let beforeRouteActionMiddleware = function * (request, response, next) {
     // Inject request and response into controller instance
     if (finalHandler.instance && finalHandler.instance.beforeRouteAction) {
-      finalHandler.instance.beforeRouteAction(request, response)
+      return yield finalHandler.instance.beforeRouteAction(request, response, next)
     }
 
-    yield next
+    yield next;
   }
 
   return routeMiddleware.concat([beforeRouteActionMiddleware, finalHandler])
