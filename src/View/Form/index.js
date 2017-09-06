@@ -144,7 +144,9 @@ class Form {
 
     if (_.isArray(options)) {
       return _.map(options, (option) => {
-        return `<option ${this._makeOptionsAttributes(option, selected)}> ${option} </option>`
+        return (option.label && option.value)
+            ? `<option ${this._makeOptionsAttributes(option.value, selected)}> ${option.label} </option>`
+            : `<option ${this._makeOptionsAttributes(option, selected)}> ${option} </option>`;
       })
     }
     return _.map(options, (option, key) => {
