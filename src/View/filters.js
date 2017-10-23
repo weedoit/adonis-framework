@@ -37,7 +37,10 @@ module.exports = function (env, Route) {
    * output input as json
    */
   env.addFilter('json', function (val, identation) {
-    identation = identation || 4
-    return JSON.stringify(val, null, identation)
+    if (typeof identation !== 'undefined') {
+      return JSON.stringify(val, null, identation)
+    } else {
+      return JSON.stringify(val)
+    }
   })
 }
