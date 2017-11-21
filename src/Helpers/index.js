@@ -204,6 +204,11 @@ Helpers.appNameSpace = function () {
  */
 Helpers.makeNameSpace = function (baseNameSpace, toPath) {
   const appNameSpace = Helpers.appNameSpace()
+
+  if (toPath.match(/^(.*)@(.*)/g)) {
+    return toPath.replace(/^(.*)@(.*)/g, 'App/Modules/$1/$2');
+  }
+  
   if (toPath.startsWith(`${appNameSpace}/`)) {
     return toPath
   }
